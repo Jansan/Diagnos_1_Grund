@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Diagnos_1_Grund
 {
@@ -37,7 +38,22 @@ namespace Diagnos_1_Grund
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            bool isRunning = true;
+            List<Bil> bilLista = new List<Bil>();
+
+            while (isRunning)
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("\n\n\t ********************************"
+                    + "\n\t * Välkommen till Bilregistret *"
+                    + "\n\t *******************************"
+                    + "\n\n\t [1] Registera ny bil"
+                    + "\n\t [2] Se alla registrerade bilar"
+                    + "\n\t [3] Importera bil"
+                    + "\n\t [4] Avsluta");
+                Console.ResetColor();
+            }
         }
     }
 }
