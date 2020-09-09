@@ -53,7 +53,46 @@ namespace Diagnos_1_Grund
                     + "\n\t [3] Importera bil"
                     + "\n\t [4] Avsluta");
                 Console.ResetColor();
+
+                if (Int32.TryParse(Console.ReadLine(), out int resultat)
+                {
+                    switch (resultat)
+                    {
+                        case 1:
+                            string registreringsNumber = "";
+                            string tillverkare = "";
+                            int årtal = 0;
+                            bool besiktad = false;
+
+                            while (registreringsNumber.Length != 6)
+                            {
+                                Console.Clear();
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.WriteLine("\n\n\t * Då börjar vi med att välja bilens registeringsnummber. Var god skriv in 6 symboler *");
+                                Console.ResetColor();
+                                Console.Write("\t * ");
+                                registreringsNumber = Console.ReadLine().ToUpper();
+                                if (registreringsNumber.Length != 6)
+                                {
+                                    Felmeddelande("Registrering sker med 6 symboler, utan mellanslag");
+                                }
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
+        }
+
+        private static void Felmeddelande(string kontext)
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\n\n\t * " + kontext + " *");
+            Console.ResetColor();
+            Console.WriteLine("\t * (Tryck ENTER för att fortsätta)");
+            Console.ReadLine();
         }
     }
 }
