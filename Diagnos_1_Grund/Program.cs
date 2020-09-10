@@ -54,7 +54,7 @@ namespace Diagnos_1_Grund
                     + "\n\t [4] Avsluta");
                 Console.ResetColor();
 
-                if (Int32.TryParse(Console.ReadLine(), out int resultat)
+                if (Int32.TryParse(Console.ReadLine(), out int resultat))
                 {
                     switch (resultat)
                     {
@@ -77,10 +77,76 @@ namespace Diagnos_1_Grund
                                     Felmeddelande("Registrering sker med 6 symboler, utan mellanslag");
                                 }
                             }
+
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.WriteLine("\n\n\t * Vilken tillverkare har bilen? *");
+                            Console.ResetColor();
+                            Console.Write("\t * ");
+                            tillverkare = Console.ReadLine().ToUpper();
+                            if (tillverkare == "")
+                                tillverkare = "ÖKÄND";
+
+                            while (årtal < 1900)
+                            {
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.WriteLine("\n\n\t * Var god skriv in året då bilen tillverkades *");
+                                Console.ResetColor();
+                                Console.Write("\t * ");
+                                if (Int32.TryParse(Console.ReadLine(), out årtal))
+                                {
+                                    if (årtal < 1900 || årtal > DateTime.Now.Year)
+                                        Felmeddelande("Måste välja mellan 1990 till i år");
+                                    else
+                                    {
+
+                                    }
+                                }
+                            }
+
+                            string input = "";
+                            while (input == "")
+                            {
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.WriteLine("\n\n\t * Är bilen besiktad? (Ja / Nej) *");
+                                Console.ResetColor();
+                                Console.Write("\t * ");
+                                input = Console.ReadLine();
+                                if (input.Length > 0)
+                                {
+                                    if (input[0] == 'j' || input[0] == 'J')
+                                    {
+                                        besiktad = true;
+                                        Console.WriteLine("\n\n\t * Noterat - Bilen är besiktad. *");
+                                    }
+                                    else if(input[0] == 'n' || input[0] == 'N')
+                                    {
+                                        besiktad = false;
+                                        Console.WriteLine("\n\n\t * Noterat - Bilen är inte besiktad. *");
+                                    }
+                                    else
+                                    {
+                                        input = "";
+                                        Felmeddelande("Du behöver skriva in Ja eller Nej");
+                                    }
+                                }
+                                else
+                                {
+                                    Felmeddelande("Du måste göra ett val");
+                                }
+                            }
+
+                            Bil nyBil = new Bil(registreringsNumber, tillverkare, årtal, besiktad);
+
+                            bilLista.Add(nyBil);
+
                             break;
                         default:
                             break;
                     }
+                }
+                else
+                {
+                    Felmeddelande("Ogiltigt menyval");
                 }
             }
         }
