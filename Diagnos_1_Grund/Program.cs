@@ -140,6 +140,83 @@ namespace Diagnos_1_Grund
                             bilLista.Add(nyBil);
 
                             break;
+
+                        case 2:
+                            if(bilLista.Count > 0)
+                            {
+                                Console.Clear();
+                                Console.ForegroundColor = ConsoleColor.White;
+                                foreach (Bil item in bilLista)
+                                {
+                                    Console.WriteLine(item);
+                                }
+                                Console.WriteLine("\n\n\t * " + bilLista.Count + " bilar är total registerade. * ");
+                                Console.ResetColor();
+                                Console.ReadLine();
+                            }
+                            else
+                            {
+                                Felmeddelande("Det finns inga registrerade bilar i dagsläget");
+                            }
+                            break;
+
+                        case 3:
+                            Random newRandom = new Random();
+                            string[] slumpABC = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "Å", "Ä", "Ö" };
+                            string[] slumpTillverkare = new string[] { "Toyota", "Volkswagen", "General Motors", "Hyundai", "Ford", "Nissan", "Honda", "Fiat Chrysler", "Renault", "Volvo" };
+
+                            Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.WriteLine("\n\n\t * Hur många bilar vill du importera? *");
+                            Console.Write("\t * ");
+                            if (Int32.TryParse(Console.ReadLine(), out int antalBilar))
+                            {
+                                if (antalBilar > 0)
+                                {
+                                    for (int i = 0; i < antalBilar; i++)
+                                    {
+                                        string register_slum = "";
+                                        for (int a = 0; a < 3; a++)
+                                        {
+                                            register_slum += slumpABC[newRandom.Next(0, slumpABC.Length)];
+                                        }
+                                        for (int b = 0; b < 3; b++)
+                                        {
+                                            register_slum += newRandom.Next(0, 10);
+                                        }
+
+                                        string tillverkare_slum = slumpTillverkare[newRandom.Next(0, slumpTillverkare.Length)];
+
+                                        int årtal_slump = newRandom.Next(1920, (DateTime.Now.Year + 1));
+
+                                        bool besiktad_slump = false;
+
+                                        if (newRandom.Next(0,2) == 0)
+                                        {
+                                            besiktad_slump = true;
+                                        }
+                                        bilLista.Add(new Bil(register_slum, tillverkare_slum, årtal_slump, besiktad_slump));
+                                    }
+                                    Console.WriteLine("\t * " + antalBilar + " bilar registrerade *");
+                                    Console.ResetColor();
+                                    Console.ReadLine();
+                                }
+                                else
+                                {
+                                    Console.WriteLine("\t * Återvänder till huvudmeny *");
+                                    Console.ResetColor();
+                                    Console.ReadLine();
+                                }
+                            }
+                            else
+                            {
+                                Felmeddelande("Du har inte valt ett giltigt antal!");
+                            }
+                            break;
+
+                        case 4:
+                            isRunning = false;
+                            break;
                         default:
                             break;
                     }
